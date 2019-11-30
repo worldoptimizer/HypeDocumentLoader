@@ -1,2 +1,68 @@
 # HypeDocumentLoader
-This extension uses a tiny runtime proxy to fetch the loader data, offering instant access to it. This allows to read and maipulate some values you wouldn’t usually haveaccess to …
+![image|690x306](https://forums.tumult.com/uploads/db2156/original/3X/3/0/300196e12f7cf30bb2917e15034aeed9b39f889e.png)   
+
+This is a geeky extension. It uses a tiny runtime proxy to fetch the loader data directly offering instant access to it. This allows to read and maipulate some values you wouldn't usually haveaccess to … starting with a list of all associated resources. Some values are already part of the regular Hype API others are very geeky and useful to only a subset of developers. **Be reminded that the internal Hype data structure is not officially supported and could change at any time…** neither the less, this extension offers ways for certain projects to inspect files, layers, scenes and timelines for what ever reason that might be necessary. This extensions offers to new Hype events
+
+---
+
+#### `HypeDocumentData`
+This callback acts as a filter and receveis the data in `event.data`. You can create and act upon the data. If you manipulate the data and want that to be passed on to the build process return it at the end of the callback.
+```
+<script>	
+	//EXAMPLE: Adding something to the head of the page
+	function documentDataAddToHead(hypeDocument, element, event){
+		console.log ('HypeDocumentData', event.data);
+		// manipulate data. For example add something to the head 
+		event.data.headAdditions.push('<!-- hello -->');
+		// return to assign
+		return event.data;
+	}
+	
+	if("HYPE_eventListeners" in window === false) { 
+		window.HYPE_eventListeners = Array();
+	}
+	window.HYPE_eventListeners.push({"type":"HypeDocumentData", "callback":documentDataAddToHead});
+</script>
+```
+
+---
+
+#### `HypeDocumentRender`
+This callback acts way to prevent Hype from rendering or delaying/managing the render process. It receives the render command as part of the event as` event.render` and can be triggered at any time with `event.render();`. If you take over the time you want Hype to render disable regular rendering by returning false from the callback.
+```
+<script>	
+	//EXAMPLE: Render Hype with an one second delay
+	function documentRender(hypeDocument, element, event){
+		// create some visual feedback (totally optional)
+		var containerElm = document.getElementById(event.id)
+		var newElm = document.createElement('div');
+		newElm.innerHTML = "<br>Let us delay this for 1 second!";
+		containerElm.appendChild(newElm);
+		// let us delay
+		setTimeout(function(){
+			event.render();
+		},1000);
+		// return false to block instant render
+		return false;
+	}
+
+	if("HYPE_eventListeners" in window === false) { 
+		window.HYPE_eventListeners = Array();
+	}
+	window.HYPE_eventListeners.push({"type":"HypeDocumentRender", "callback":documentRender});
+</script>
+```
+
+---
+
+**Child extension in the works:** Thinking about adding some helper functions to interpret the data...this will become its own extension using the event callback to not bloat the core functionality of this fine little helper. Have fun.
+
+**Demo (output in the console):**  
+[HypeDocumentLoader.html](https://playground.maxziebell.de/Hype/DocumentLoader/HypeDocumentLoader.html)
+
+**Versions:**\
+`1.0	Initial release under MIT`  
+`1.1   Removed additional loading request and asynchronicity`  
+`1.2   Added notification system to allow further extensibility`  
+`1.3   Tweaked notifyEvent to be additive, added hypeDocument.notifyEventAdditivum`  
+`1.4   Added new event HypeDocumentRender, Refactored name to HypeDocumentLoader.js and event to HypeDocumentData`
