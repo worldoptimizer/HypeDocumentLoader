@@ -7,7 +7,7 @@ This is a geeky extension. It uses a tiny runtime proxy to fetch the loader data
 
 #### `HypeDocumentData`
 This callback acts as a filter and receveis the data in `event.data`. You can create and act upon the data. If you manipulate the data and want that to be passed on to the build process return it at the end of the callback.
-```
+```javascript
 <script>	
 	//EXAMPLE: Adding something to the head of the page
 	function documentDataAddToHead(hypeDocument, element, event){
@@ -29,7 +29,7 @@ This callback acts as a filter and receveis the data in `event.data`. You can cr
 
 #### `HypeDocumentRender`
 This callback acts way to prevent Hype from rendering or delaying/managing the render process. It receives the render command as part of the event as` event.render` and can be triggered at any time with `event.render();`. If you take over the time you want Hype to render disable regular rendering by returning false from the callback.
-```
+```javascript
 <script>	
 	//EXAMPLE: Render Hype with an one second delay
 	function documentRender(hypeDocument, element, event){
