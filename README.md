@@ -1,5 +1,5 @@
 # HypeDocumentLoader
-![image|690x306](https://forums.tumult.com/uploads/db2156/original/3X/3/0/300196e12f7cf30bb2917e15034aeed9b39f889e.png)   
+![HypeDocumentLoader|690x487](https://playground.maxziebell.de/Hype/DocumentLoader/HypeDocumentLoader.png)   
 
 This is a geeky extension. It uses a tiny runtime proxy to fetch the loader data directly offering instant access to it. This allows to read and maipulate some values you wouldn't usually haveaccess to … starting with a list of all associated resources. Some values are already part of the regular Hype API others are very geeky and useful to only a subset of developers. **Be reminded that the internal Hype data structure is not officially supported and could change at any time…** neither the less, this extension offers ways for certain projects to inspect files, layers, scenes and timelines for what ever reason that might be necessary. This extensions offers to new Hype events
 
@@ -28,7 +28,7 @@ This callback acts as a filter and receveis the data in `event.data`. You can cr
 ---
 
 #### `HypeDocumentRender`
-This callback acts way to prevent Hype from rendering or delaying/managing the render process. It receives the render command as part of the event as` event.render` and can be triggered at any time with `event.render();`. If you take over the time you want Hype to render disable regular rendering by returning false from the callback.
+This callback offers a way to prevent Hype from rendering immediately and allows to delay/manage the render process. It receives the render command as part of the event as` event.render` and can be triggered at any time with `event.render();`. If you take over the time you want Hype to render disable regular rendering by returning false from the callback.
 ```javascript
 <script>	
 	//EXAMPLE: Render Hype with an one second delay
