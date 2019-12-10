@@ -60,6 +60,9 @@ This callback offers a way to prevent Hype from rendering immediately and allows
 **Demo (output in the console):**  
 [HypeDocumentLoader.html](https://playground.maxziebell.de/Hype/DocumentLoader/HypeDocumentLoader.html)
 
+**Further code examples in the Wiki:**
+https://github.com/worldoptimizer/HypeDocumentLoader/wiki
+
 **Versions:**\
 `1.0	Initial release under MIT`  
 `1.1   Removed additional loading request and asynchronicity`  
