@@ -69,3 +69,15 @@ https://github.com/worldoptimizer/HypeDocumentLoader/wiki
 `1.2   Added notification system to allow further extensibility`  
 `1.3   Tweaked notifyEvent to be additive, added hypeDocument.notifyEventAdditivum`  
 `1.4   Added new event HypeDocumentRender, Refactored name to HypeDocumentLoader.js and event to HypeDocumentData`
+
+Content Delivery Network (CDN)
+--
+Latest minified version can be linked into your project using the following in the head section of your project:
+```html
+<script src="https://cdn.jsdelivr.net/gh/worldoptimizer/HypeDocumentLoader/HypeDocumentLoader.min.js"></script>
+```
+
+Optionally you can also link a SRI version or specific releases. Read more about that on the JsDelivr (CDN) page for this extension at https://www.jsdelivr.com/package/gh/worldoptimizer/HypeDocumentLoader
+
+Learn how to use the latest extension version and how to combine extentions into one file at
+https://github.com/worldoptimizer/HypeCookBook/wiki/Including-external-files-and-Hype-extensions
