@@ -1,5 +1,5 @@
 # HypeDocumentLoader
-![HypeDocumentLoader|690x487](https://playground.maxziebell.de/Hype/DocumentLoader/HypeDocumentLoader.png)   
+![HypeDocumentLoader|690x487](https://playground.maxziebell.de/Hype/DocumentLoader/HypeDocumentLoader.jpg)   
 <sup>The cover artwork is not hosted in this repository and &copy;opyrighted by Max Ziebell</sup>
 
 This is a geeky extension. It uses a tiny runtime proxy to fetch the loader data directly offering instant access to it. This allows to read and maipulate some values you wouldn't usually haveaccess to … starting with a list of all associated resources. Some values are already part of the regular Hype API others are very geeky and useful to only a subset of developers. **Be reminded that the internal Hype data structure is not officially supported and could change at any time…** neither the less, this extension offers ways for certain projects to inspect files, layers, scenes and timelines for what ever reason that might be necessary. This extensions offers to new Hype events
@@ -73,12 +73,13 @@ https://github.com/worldoptimizer/HypeDocumentLoader/wiki
 
 Content Delivery Network (CDN)
 --
-Latest minified version can be linked into your project using the following in the head section of your project:
+Latest version can be linked into your project using the following in the head section of your project:
 ```html
 <script src="https://cdn.jsdelivr.net/gh/worldoptimizer/HypeDocumentLoader/HypeDocumentLoader.min.js"></script>
 ```
 
-Optionally you can also link a SRI version or specific releases. Read more about that on the JsDelivr (CDN) page for this extension at https://www.jsdelivr.com/package/gh/worldoptimizer/HypeDocumentLoader
+Optionally you can also link a SRI version or specific releases. 
+Read more about that on the JsDelivr (CDN) page for this extension at https://www.jsdelivr.com/package/gh/worldoptimizer/HypeDocumentLoader
 
-Learn how to use the latest extension version and how to combine extentions into one file at
+Learn how to use the latest extension version and how to combine extensions into one file at
 https://github.com/worldoptimizer/HypeCookBook/wiki/Including-external-files-and-Hype-extensions
