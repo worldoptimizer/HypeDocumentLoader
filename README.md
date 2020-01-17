@@ -2,7 +2,7 @@
 ![HypeDocumentLoader|690x487](https://playground.maxziebell.de/Hype/DocumentLoader/HypeDocumentLoader.jpg)   
 <sup>The cover artwork is not hosted in this repository and &copy;opyrighted by Max Ziebell</sup>
 
-This is a geeky extension. It uses a tiny runtime proxy to fetch the loader data directly offering instant access to it. This allows to read and maipulate some values you wouldn't usually haveaccess to … starting with a list of all associated resources. Some values are already part of the regular Hype API others are very geeky and useful to only a subset of developers. **Be reminded that the internal Hype data structure is not officially supported and could change at any time…** neither the less, this extension offers ways for certain projects to inspect files, layers, scenes and timelines for what ever reason that might be necessary. This extensions offers to new Hype events
+This is a geeky extension. It uses a tiny runtime proxy to fetch the loader data directly offering instant access to it. This allows to read and maipulate some values you wouldn't usually haveaccess to … starting with a list of all associated resources. Some values are already part of the regular Hype API others are very geeky and useful to only a subset of developers. **Be reminded that the internal Hype data structure is not officially supported and could change at any time…** neither the less, this extension offers ways for certain projects to inspect files, layers, scenes and timelines for what ever reason that might be necessary. This extension offers two new Hype events.
 
 ---
 
