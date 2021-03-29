@@ -7,10 +7,10 @@ This is a geeky extension. It uses a tiny runtime proxy to fetch the loader data
 ---
 
 #### `HypeDocumentLoader.setBuild()`
-The first thing that needs to be done and unfortunatly updated over time is declare the current Build number. You can find the current build number when opening the "about" dialog in Hype.
+The first thing that needs to be done and unfortunatly updated over time is declare the current Build number. You can find the current build number when opening the "about" dialog in Hype. This is usually a three digit number like 728 etc.
 
 ```
-HypeDocumentData.setBuild(NUMBER);
+HypeDocumentLoader.setBuild(NUMBER);
 ```
 
 ---
