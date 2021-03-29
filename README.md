@@ -6,6 +6,15 @@ This is a geeky extension. It uses a tiny runtime proxy to fetch the loader data
 
 ---
 
+#### `HypeDocumentData.setBuild`
+The first thing that needs to be done and unfortunatly updated over time is declare the current Build number. You can find the current build number when opening the "about" dialog in Hype.
+
+```
+HypeDocumentData.setBuild(NUMBER);
+```
+
+---
+
 #### `HypeDocumentData`
 This callback acts as a filter and receveis the data in `event.data`. You can create and act upon the data. If you manipulate the data and want that to be passed on to the build process return it at the end of the callback.
 ```javascript
