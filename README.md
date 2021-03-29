@@ -6,7 +6,7 @@ This is a geeky extension. It uses a tiny runtime proxy to fetch the loader data
 
 ---
 
-#### `HypeDocumentData.setBuild`
+#### `HypeDocumentLoader.setBuild()`
 The first thing that needs to be done and unfortunatly updated over time is declare the current Build number. You can find the current build number when opening the "about" dialog in Hype.
 
 ```
