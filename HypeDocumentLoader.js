@@ -1,6 +1,6 @@
 /*!
 Hype DocumentLoader 1.4.1
-copyright (c) 2019 Max Ziebell, (https://maxziebell.de). MIT-license
+copyright (c) 2021 Max Ziebell, (https://maxziebell.de). MIT-license
 */
 /*
 * Version-History
