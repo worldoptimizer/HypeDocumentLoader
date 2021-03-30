@@ -1,5 +1,5 @@
 /*!
-Hype DocumentLoader 1.4
+Hype DocumentLoader 1.4.1
 copyright (c) 2019 Max Ziebell, (https://maxziebell.de). MIT-license
 */
 /*
@@ -9,6 +9,8 @@ copyright (c) 2019 Max Ziebell, (https://maxziebell.de). MIT-license
 * 1.2   Added notification system to allow further extensibility
 * 1.3   Tweaked notifyEvent to be additive, added hypeDocument.notifyEventAdditivum
 * 1.4   Added new event HypeDocumentRender, Refactored extention to HypeDocumentLoader
+* --- Semantic versioning ---
+* 1.4.1 	Fixed missing HYPE.document reference when blocking renderer
 */
 
 if("HypeDocumentLoader" in window === false) window['HypeDocumentLoader'] = (function () {
@@ -133,16 +135,18 @@ if("HypeDocumentLoader" in window === false) window['HypeDocumentLoader'] = (fun
   						}
 					});
 				}
-				//init and extend directly (not through notify)
+				//init and extend directly
 				var h = new (Function.prototype.bind.apply(runtime[kBuild], [null].concat(Array.from(a))));
 				extendHype(h['API']);
-				// do this here so a blocked loader doesn't fail todo it
-				window['HYPE']['documents'][b.documentName] = h['API'];
-				document.getElementById(b.mainContainerID).setAttribute("HYP_dn", b.documentName);
+				
 				// store, communicate render intent and render if needed
 				var loader = {
 					"type": "HypeDocumentRender",
-					render: h.z_o,
+					render: function(){
+						// set API on render because it was blocked and set to {}
+						window['HYPE']['documents'][b.documentName] = h['API'];
+						h.z_o();
+					},
 					name: b.documentName,
 					id: b.mainContainerID,
 					data: b
@@ -156,7 +160,7 @@ if("HypeDocumentLoader" in window === false) window['HypeDocumentLoader'] = (fun
 					return h;
 				} else {
 					return {
-						API:null,
+						API: {},
 						z_o:function(){}
 					}
 				}
@@ -171,24 +175,11 @@ if("HypeDocumentLoader" in window === false) window['HypeDocumentLoader'] = (fun
 		}
 	}
 
-	function renderFactory(runtime, a,b){
-		return function(delayed){
-			var h = new (Function.prototype.bind.apply(runtime, [null].concat(Array.from(a))));
-			extendHype(h['API']);
-			if(delayed) {
-				window['HYPE']['documents'][b.documentName] = h['API'];
-				document.getElementById(b.mainContainerID).setAttribute("HYP_dn", b.documentName);
-				h.z_o(window.body);
-			}
-			return h;
-		}
-	}
-
 	if("HYPE_eventListeners" in window === false) { window.HYPE_eventListeners = Array();}
 
 	/* Reveal Public interface to window['HypeDocumentLoader'] */
 	return {
-		version : '1.4',
+		version : '1.4.1',
 		setBuild : setBuild
 	};
 })();
