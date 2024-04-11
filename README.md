@@ -5,6 +5,8 @@
 This is a geeky extension. It uses a tiny runtime proxy to fetch the loader data directly offering instant access to it. This allows to read and maipulate some values you wouldn't usually haveaccess to … starting with a list of all associated resources. Some values are already part of the regular Hype API others are very geeky and useful to only a subset of developers. **Be reminded that the internal Hype data structure is not officially supported and could change at any time…** neither the less, this extension offers ways for certain projects to inspect files, layers, scenes and timelines for what ever reason that might be necessary. This extension offers two new Hype events.
 
 ---
+### NEW: Auto detection since version 1.4.2!
+Starting from version 1.4.2, the library automatically detects the build number. Setting the build number is only necessary if you intend to target multiple or specific build numbers or those not covered by the new autodetection from build 750 to 800.
 
 #### `HypeDocumentLoader.setBuild()`
 The first thing that needs to be done and unfortunatly updated over time is declare the current Build number. You can find the current build number when opening the "about" dialog in Hype. This is usually a three digit number like 728 etc.
