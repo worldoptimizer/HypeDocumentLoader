@@ -1,6 +1,6 @@
 /*!
-Hype DocumentLoader 1.4.1
-copyright (c) 2021 Max Ziebell, (https://maxziebell.de). MIT-license
+Hype DocumentLoader 1.4.2
+copyright (c) 2024 Max Ziebell, (https://maxziebell.de). MIT-license
 */
 /*
 * Version-History
@@ -10,13 +10,17 @@ copyright (c) 2021 Max Ziebell, (https://maxziebell.de). MIT-license
 * 1.3   Tweaked notifyEvent to be additive, added hypeDocument.notifyEventAdditivum
 * 1.4   Added new event HypeDocumentRender, Refactored extention to HypeDocumentLoader
 * --- Semantic versioning ---
-* 1.4.1 	Fixed missing HYPE.document reference when blocking renderer
+* 1.4.1   Fixed missing HYPE.document reference when blocking renderer
+* 1.4.2   Added broad initialization across multiple build numbers automatically
 */
 
 if("HypeDocumentLoader" in window === false) window['HypeDocumentLoader'] = (function () {
 	
-	var runtime = {};
-	var documentLoaderInfo = {};
+	let runtime = {};
+	let documentLoaderInfo = {};
+	let autoBuild = true;
+	let autoBuildMin = 750;
+	let autoBuildMax = 800;
 	
 	function extendHype (hypeDocument, element, event){
 		/**
@@ -75,22 +79,53 @@ if("HypeDocumentLoader" in window === false) window['HypeDocumentLoader'] = (fun
 	}
 
 	/**
-	* setupDocumentLoaderInfo
+	* setupBuild
 	* @param {String} Build-Identifier (only number portion)
 	*/
-	function setBuild(build){
-		setupDocumentLoaderInfo('HYPE_'+build+'T');
-		setupDocumentLoaderInfo('HYPE_'+build+'F');
+	function setBuild(build, isAutoBuild){
+		if (!isAutoBuild) deleteAutoBuild(build);
+		setupDocumentLoaderInfo('HYPE_'+build+'T', build);
+		setupDocumentLoaderInfo('HYPE_'+build+'F', build);
+	}
+
+	/**
+	 * setupAutoBuild
+	 */
+	function setupAutoBuild(){
+		if (autoBuild) {
+			for (let build=autoBuildMin; build<=autoBuildMax; build++){
+				setBuild(build, true);
+			}
+		}
+	}
+
+	/**
+	 * deleteAutoBuild
+	 * @param {String} Build-Identifier
+	 */
+	function deleteAutoBuild(keepBuild){
+		if (autoBuild) {
+			for (let build=autoBuildMin; build<=autoBuildMax; build++){
+				if(build!=keepBuild){
+					delete window['HYPE_'+build+'T'];
+					delete window['HYPE_'+build+'F'];
+				}
+			}
+			autoBuild = false;
+		}
 	}
 
 	/**
 	* setupDocumentLoaderInfo
 	* @param {String} Build-Identifier
 	*/
-	function setupDocumentLoaderInfo(kBuild) {
+	function setupDocumentLoaderInfo(kBuild, build) {
 		if (kBuild) {
 			var runtimeProxy = function (){
+				// remove all other builds
+				
 				var a = arguments;
+				if (a.length) deleteAutoBuild(build);
 				var b = {
 					documentName : a[0],
 					mainContainerID: a[1],
@@ -166,20 +201,25 @@ if("HypeDocumentLoader" in window === false) window['HypeDocumentLoader'] = (fun
 				}
 			}
 			// observe using proxy
-			Object.defineProperty(window, kBuild, { 
-				get: function() { return runtime[kBuild] ? runtimeProxy : undefined;},
-				set: function(h) { runtime[kBuild] = h;} 
+			Object.defineProperty(window, kBuild, {
+				enumerable: true,
+				configurable: true,
+				get: function() {return runtime[kBuild] ? runtimeProxy : undefined;},
+				set: function(h) {runtime[kBuild] = h;} 
 			});
 		} else {
 			console.log('Hype DocumentLoader: Please provide a build')
 		}
 	}
+	
+	// create a bunch of build functions
+	setupAutoBuild();
 
 	if("HYPE_eventListeners" in window === false) { window.HYPE_eventListeners = Array();}
 
 	/* Reveal Public interface to window['HypeDocumentLoader'] */
 	return {
-		version : '1.4.1',
+		version : '1.4.2',
 		setBuild : setBuild
 	};
 })();
